@@ -39,7 +39,7 @@ function App() {
     setFriends((friend) =>
       friend.map((friend) =>
         friend.id === selectedFriend.id
-          ? { ...friend, balance: friend.balance + value }
+          ? { ...friend, balance: friend.balance + amount }
           : friend
       )
     );

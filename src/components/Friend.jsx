@@ -38,8 +38,6 @@ const Friend = ({ friend, selectFriend, selectedFriend }) => {
       <div className="flex justify-center">
         <Button
           onClick={() => {
-            console.log("console logging", friend.id);
-            console.log(isSelected);
             selectFriend(friend.id);
           }}
         >

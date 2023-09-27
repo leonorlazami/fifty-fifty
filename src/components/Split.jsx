@@ -3,24 +3,34 @@ import Button from "./Button";
 
 const Split = ({ selectedFriend, handleSplitBill }) => {
   const [bill, setBill] = useState("");
-  const [paidByUser, setPaidByUser] = "";
+  const [paidByUser, setPaidByUser] = useState("");
   const paidByFriend = bill ? bill - paidByUser : "";
   const [whoIsPaying, setWhoIsPaying] = useState("user");
 
   if (selectedFriend === null) {
     return null;
   }
+  function handleSubmit(e) {
+    e.preventDefault();
 
+    if (!bill || !paidByUser) return;
+    handleSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByUser);
+  }
   return (
     <div className="bg-kinda-dark-green mx-auto h-1/2 relative bottom-3 py-5 rounded-md md:h-[1/2] z-1 md:bottom-0 w-full md:w-1/2 md:ml-2 text-kinda-white font-custom-one">
       <h3 className="text-3xl px-4 md:px-24 md:text-4xl">
         SPLIT BILL WITH {selectedFriend.name.toUpperCase()}
       </h3>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 mt-4 md:text-3xl text-xl">
           <label htmlFor="bill" className="flex justify-between mx-4 md:mx-32">
             Bill value
-            <input type="text" className="w-[23%]  text-black" value={bill} />
+            <input
+              type="text"
+              className="w-[23%]  text-black"
+              value={bill}
+              onChange={(e) => setBill(e.target.value)}
+            />
           </label>
 
           <label
@@ -32,11 +42,18 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
               type="text"
               className="w-[23%]  text-black"
               value={paidByUser}
+              onChange={(e) =>
+                setPaidByUser(
+                  Number(e.target.value) > bill
+                    ? paidByUser
+                    : Number(e.target.value)
+                )
+              }
             />
           </label>
 
           <label htmlFor="" className="flex  justify-between mx-4 md:mx-32">
-            Persons expense
+            {selectedFriend.name} expense
             <input
               disabled
               readOnly
@@ -53,6 +70,7 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
               id="payer"
               className="text-black w-[23%]"
               value={whoIsPaying}
+              onChange={(e) => setWhoIsPaying(e.target.value)}
             >
               <option value="You">You</option>
               <option
