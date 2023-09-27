@@ -2,10 +2,17 @@ import React from "react";
 import Button from "./Button";
 
 const Friend = ({ friend, selectFriend, selectedFriend }) => {
-  let isSelected;
+  const isSelected = selectedFriend?.id === friend.id;
+
+  console.log("friend.id:", friend.id);
+  console.log("selectedFriend.id:", selectedFriend?.id);
 
   return (
-    <li className="flex gap-1 my-2 hover:bg-kinda-dark-green hover:rounded-sm">
+    <li
+      className={`${
+        isSelected ? "bg-kinda-dark-green" : ""
+      } flex gap-1 my-2 hover:bg-kinda-dark-green`}
+    >
       <img
         src={friend.image}
         alt={friend.name}
@@ -31,7 +38,8 @@ const Friend = ({ friend, selectFriend, selectedFriend }) => {
       <div className="flex justify-center">
         <Button
           onClick={() => {
-            console.log("console logign", friend.id);
+            console.log("console logging", friend.id);
+            console.log(isSelected);
             selectFriend(friend.id);
           }}
         >

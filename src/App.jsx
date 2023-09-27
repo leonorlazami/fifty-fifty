@@ -26,7 +26,6 @@ const initialFriends = [
 function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [showForm, setShowForm] = useState(false);
-
   const [selectedFriend, setSelectedFriend] = useState(null);
   const selectFriend = (id) => {
     const friend = friends.find((friend) => friend.id === id);
@@ -35,7 +34,16 @@ function App() {
   const addFriend = (newFriend) => {
     setFriends([...friends, newFriend]);
   };
-  console.log(selectedFriend);
+
+  const handleSplitBill = (amount) => {
+    setFriends((friend) =>
+      friend.map((friend) =>
+        friend.id === selectedFriend.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend
+      )
+    );
+  };
   return (
     <>
       <NavBar />
@@ -48,7 +56,12 @@ function App() {
           selectFriend={selectFriend}
           selectedFriend={selectedFriend}
         />
-        {selectFriend && <Split selectedFriend={selectedFriend} />}
+        {selectedFriend && (
+          <Split
+            selectedFriend={selectedFriend}
+            handleSplitBill={handleSplitBill}
+          />
+        )}
       </div>
     </>
   );
