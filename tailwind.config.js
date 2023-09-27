@@ -13,11 +13,13 @@ export default {
         'kinda-dark-green': '#2D6A4F',
         'slightly-dark-green': '#1B4332',
         'real-dark-green': '#081C15',
-        'most-dark-green': '#04100C'
+        'most-dark-green': '#04100C',
+        'not-green': '#8EAF9D',
 
       },
       fontFamily: {
-        'custom-one': ['Handjet', 'cursive']
+        'custom-one': ['Handjet', 'cursive'],
+        'custom-two': ['DotGothic16', 'sans-serif']
       }
     },
   },

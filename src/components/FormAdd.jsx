@@ -3,8 +3,8 @@ import Button from "./Button";
 
 const FormAdd = ({ addFriend, setShowForm }) => {
   const [formData, setFormData] = useState({
-    name: null, // Set the initial value to null
-    image: "https://i.pravatar.cc/48",
+    name: null,
+    image: "https://i.pravatar.cc/64",
     balance: "",
   });
 
@@ -26,7 +26,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
     addFriend(newFriend);
 
     setFormData({
-      name: null, // Reset the value to null after submission
+      name: null,
       image: "https://i.pravatar.cc/48",
       balance: "",
     });
@@ -43,7 +43,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
             onChange={handleChange}
             type="text"
             id="friendName"
-            name="name" // Set the field name to "name"
+            name="name"
             className="text-black w-full border border-gray-300 rounded-md px-3 py-1"
           />
 

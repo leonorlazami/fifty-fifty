@@ -24,19 +24,24 @@ const initialFriends = [
   },
 ];
 
-const FriendList = () => {
-  const [friends, setFriends] = useState(initialFriends);
-  const [showForm, setShowForm] = useState(false);
-
-  const addFriend = (newFriend) => {
-    setFriends([...friends, newFriend]);
-  };
-
+const FriendList = ({
+  selectFriend,
+  selectedFriend,
+  friends,
+  addFriend,
+  showForm,
+  setShowForm,
+}) => {
   return (
-    <div className=" flex flex-col bg-real-dark-green text-kinda-white font-custom-one text-xl rounded-md py-4 md:w-[50%] md:mx-auto md:text-3xl">
+    <div className=" flex flex-col bg-real-dark-green text-kinda-white font-custom-one text-xl rounded-md py-4 md:w-[50%] md:mx-auto md:text-3xl z-10">
       <ul className="">
         {friends.map((friend) => (
-          <Friend friend={friend} key={friend.id} />
+          <Friend
+            friend={friend}
+            key={friend.id}
+            selectFriend={selectFriend}
+            selectedFriend={selectedFriend}
+          />
         ))}
       </ul>
 
@@ -46,7 +51,6 @@ const FriendList = () => {
           className=""
           onClick={() => {
             setShowForm((prev) => !prev);
-            console.log("showForm:", showForm);
           }}
         >
           {showForm ? "Close" : "Add friend"}
