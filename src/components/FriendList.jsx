@@ -2,27 +2,7 @@ import React, { useState } from "react";
 import Friend from "./Friend";
 import Button from "./Button";
 import FormAdd from "./FormAdd";
-
-const initialFriends = [
-  {
-    id: 933372,
-    name: "Ali",
-    image: "https://i.pravatar.cc/64?u=933372",
-    balance: 200,
-  },
-  {
-    id: 933373,
-    name: "Semi",
-    image: "https://i.pravatar.cc/64?u=933372",
-    balance: 200,
-  },
-  {
-    id: 499476,
-    name: "Rroni",
-    image: "https://i.pravatar.cc/64?u=499476",
-    balance: 0,
-  },
-];
+import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
 
 const FriendList = ({
   selectFriend,
@@ -32,9 +12,76 @@ const FriendList = ({
   showForm,
   setShowForm,
 }) => {
+  const totalOwedToYou = friends.reduce(
+    (accumulator, friend) =>
+      accumulator +
+      (parseInt(friend.owesYou, 10) > 0 ? parseInt(friend.owesYou, 10) : 0),
+    0
+  );
+  const totalYouOwe = friends.reduce(
+    (accumulator, friend) =>
+      accumulator +
+      (parseInt(friend.youOwe, 10) > 0 ? parseInt(friend.youOwe, 10) : 0),
+    0
+  );
+
+  const oweToYouCount = friends.filter((friend) => friend.owesYou > 0).length;
+  const youOweCount = friends.filter((friend) => friend.youOwe > 0).length;
+
   return (
-    <div className=" flex flex-col bg-real-dark-green text-kinda-white font-custom-one text-xl rounded-md py-4 md:w-[50%] md:mx-auto md:text-3xl z-10">
-      <ul className="">
+    <div className=" flex flex-col font-primary text-xl rounded-3xl py-4 md:w-[50%] md:mx-auto md:text-3xl mx-2 bg-primary px-1">
+      <div className="mx-auto flex flex-col items-center font-bold mb-4">
+        <h3 className="text-md mb-[-0.2rem]">Fifty/Fifty</h3>
+        <p className="text-gray-500 text-sm">Split the bill!</p>
+      </div>
+      <div className="flex w-auto bg-gradient-to-r from-violet-500 via-violet-600 to-secondary  rounded-xl px-5 mx-2 py-4  text-primary shadow-2xl gap-2 justify-between">
+        {!oweToYouCount ? (
+          <div className="flex flex-col justify-center">
+            <p className="text-sm ">No one owes you</p>
+
+            <span className="font-bold mt-2">{totalOwedToYou} мкд</span>
+          </div>
+        ) : (
+          <div className="flex flex-col">
+            <p className="text-sm ">Total owed to you</p>
+            <span className="font-bold mt-2">{totalOwedToYou} мкд</span>
+            <p className="text-sm">
+              by{" "}
+              {oweToYouCount === 1
+                ? oweToYouCount + " " + "friend"
+                : oweToYouCount + " " + "friends"}
+            </p>
+          </div>
+        )}
+        {!youOweCount ? (
+          <div className="flex flex-col justify-center">
+            <p className="text-sm ">You owe no one</p>
+
+            <span className="font-bold mt-2">{totalYouOwe} мкд</span>
+          </div>
+        ) : (
+          <div className="flex flex-col">
+            <p className="text-sm ">Total you owe</p>
+            <span className="font-bold mt-2">{totalYouOwe} мкд</span>
+            <p className="text-sm">
+              to{" "}
+              {oweToYouCount === 1
+                ? oweToYouCount + " " + "friend"
+                : oweToYouCount + " " + "friends"}
+            </p>
+          </div>
+        )}
+      </div>
+      <div className="flex justify-between mx-2 mt-6 text-sm font-bold mb-1 px-2 ">
+        <p>Friends</p>
+
+        <button className="flex items-center ">
+          <p className="uppercase text-gray-500 mr-1">Edit</p>
+
+          <AiOutlineEdit color="gray" size={18} />
+        </button>
+      </div>
+      <ul className="py-2">
         {friends.map((friend) => (
           <Friend
             friend={friend}
@@ -46,16 +93,15 @@ const FriendList = ({
       </ul>
 
       {showForm && <FormAdd addFriend={addFriend} setShowForm={setShowForm} />}
-      <div className="w-full flex justify-end">
-        <Button
-          className=""
-          onClick={() => {
-            setShowForm((prev) => !prev);
-          }}
-        >
-          {showForm ? "Close" : "Add friend"}
-        </Button>
-      </div>
+
+      <Button
+        className="mt-2 text-sm py-3 rounded-3xl md:w-1/2  mx-auto w-[65%]"
+        onClick={() => {
+          setShowForm((prev) => !prev);
+        }}
+      >
+        {showForm ? "Close" : " + New Friend"}
+      </Button>
     </div>
   );
 };

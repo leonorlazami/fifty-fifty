@@ -2,7 +2,7 @@ import React from "react";
 
 const Button = ({ children, onClick, className, type }) => {
   const defaultClass =
-    "self-center mr-4 bg-slightly-dark-green px-2 rounded-sm text-white font-custom-one my-4";
+    "bg-gradient-to-r from-violet-500 via-violet-600 to-secondary rounded-2xl w-full py-2 font-bold text-primary";
 
   return (
     <button

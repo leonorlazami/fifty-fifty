@@ -6,28 +6,37 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
   const [paidByUser, setPaidByUser] = useState("");
   const paidByFriend = bill ? bill - paidByUser : "";
   const [whoIsPaying, setWhoIsPaying] = useState("user");
+  console.log(selectedFriend);
 
-  if (selectedFriend === null) {
-    return null;
-  }
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!bill || !paidByUser) return;
     handleSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByUser);
   }
+  if (selectedFriend === null) {
+    return null;
+  }
   return (
-    <div className="bg-kinda-dark-green mx-auto h-1/2 relative bottom-3 py-5 rounded-md md:h-[1/2] z-1 md:bottom-0 w-full md:w-1/2 md:ml-2 text-kinda-white font-custom-one">
-      <h3 className="text-3xl px-4 md:px-24 md:text-4xl">
-        SPLIT BILL WITH {selectedFriend.name.toUpperCase()}
-      </h3>
+    <div className="rounded-3xl mt-2 md:w-1/2 h-fit md:ml-2 font-primary bg-primary w-full px-4 text-sm font-bold ">
+      <div className="flex items-center justify-around">
+        <h3 className=" mt-4 md:px-24 md:text-3xl text-xl font-bold py-2">
+          Split the bill with {selectedFriend.name ? selectedFriend.name : ""}
+        </h3>
+        <img
+          src={selectedFriend.image}
+          alt=""
+          className="rounded-full w-10 md:w-16 mt-4"
+        />
+      </div>
       <form action="" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4 mt-4 md:text-3xl text-xl">
-          <label htmlFor="bill" className="flex justify-between mx-4 md:mx-32">
-            Bill value
+        <div className="flex flex-col gap-3 mt-4 md:text-normal py-2 mx-2 ">
+          <label htmlFor="bill" className="flex  flex-col  md:mx-32">
+            <p className="ml-3 mb-1">Bill Value</p>
             <input
+              placeholder="mkd"
               type="text"
-              className="w-[23%]  text-black"
+              className="w-full bg-selected rounded-2xl h-10 text-right pr-4 outline-gray-300"
               value={bill}
               onChange={(e) => setBill(e.target.value)}
             />
@@ -35,12 +44,13 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
 
           <label
             htmlFor="expense"
-            className="flex justify-between mx-4 md:mx-32"
+            className="flex flex-col justify-between  md:mx-32"
           >
-            Your expense
+            <p className="ml-3 mb-1">Your expense</p>
             <input
+              placeholder="mkd"
               type="text"
-              className="w-[23%]  text-black"
+              className="bg-selected rounded-2xl h-10 text-right pr-4 outline-gray-300"
               value={paidByUser}
               onChange={(e) =>
                 setPaidByUser(
@@ -52,23 +62,16 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
             />
           </label>
 
-          <label htmlFor="" className="flex  justify-between mx-4 md:mx-32">
-            {selectedFriend.name} expense
-            <input
-              disabled
-              readOnly
-              type="number"
-              className="w-[23%]  text-black"
-              value={paidByFriend}
-            />
-          </label>
-
-          <label htmlFor="" className="flex  justify-between mx-4 md:mx-32">
-            Who is paying the bill
+          <label
+            htmlFor=""
+            className="flex  flex-col justify-between  md:mx-32"
+          >
+            <p className="ml-3 mb-1">Who is paying the bill</p>
             <select
+              placeholder={selectedFriend.name}
               name="payer"
               id="payer"
-              className="text-black w-[23%]"
+              className="  bg-selected h-10 text-right pr-4 rounded-2xl outline-gray-300"
               value={whoIsPaying}
               onChange={(e) => setWhoIsPaying(e.target.value)}
             >
@@ -80,8 +83,17 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
               </option>
             </select>
           </label>
-          <div className="flex w-full justify-end">
-            <Button className="md:mx-32 md:w-[15%] w-1/5">Split</Button>
+          <div className="flex w-full justify-end flex-col border-t border-gray-300 mt-2">
+            <div className="flex items-center justify-between mx-4 md:text-xl md:mx-6 mb-4">
+              <h4 className="font-bold mt-4 mb-4 ">
+                {whoIsPaying === "You" && selectedFriend.name}
+              </h4>
+              <span className="">ден</span>
+            </div>
+
+            <Button className=" md:w-1/2 mx-auto mb-2 w-[65%]">
+              SPLIT IT!
+            </Button>
           </div>
         </div>
       </form>

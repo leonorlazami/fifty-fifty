@@ -2,5 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 body {
-  background-color: #95d5b2;
+  background-color: #b8babc;
+  overscroll-behavior: none;
 }

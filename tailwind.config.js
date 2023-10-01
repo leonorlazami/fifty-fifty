@@ -7,19 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'kinda-white': '#D8F3DC',
-        'kinda-green': '#B7E4C7',
-        'slightly-green': '#95D5B2',
-        'kinda-dark-green': '#2D6A4F',
-        'slightly-dark-green': '#1B4332',
-        'real-dark-green': '#081C15',
-        'most-dark-green': '#04100C',
-        'not-green': '#8EAF9D',
+        'primary': '#FFFDF7',
+        'secondary': '#023E8A',
+        'tertiary': '#E8E0D1',
+        'selected': '#E6E4DF'
+
+
 
       },
       fontFamily: {
-        'custom-one': ['Handjet', 'cursive'],
-        'custom-two': ['DotGothic16', 'sans-serif']
+        'primary': ['Open Sans', 'sans-serif'],
+
       }
     },
   },
