@@ -18,15 +18,8 @@ const FriendList = ({
       (parseInt(friend.owesYou, 10) > 0 ? parseInt(friend.owesYou, 10) : 0),
     0
   );
-  const totalYouOwe = friends.reduce(
-    (accumulator, friend) =>
-      accumulator +
-      (parseInt(friend.youOwe, 10) > 0 ? parseInt(friend.youOwe, 10) : 0),
-    0
-  );
 
   const oweToYouCount = friends.filter((friend) => friend.owesYou > 0).length;
-  const youOweCount = friends.filter((friend) => friend.youOwe > 0).length;
 
   return (
     <div className=" flex flex-col font-primary text-xl rounded-3xl py-4 md:w-[50%] md:mx-auto md:text-3xl mx-2 bg-primary px-1">
@@ -35,42 +28,16 @@ const FriendList = ({
         <p className="text-gray-500 text-sm">Split the bill!</p>
       </div>
       <div className="flex w-auto bg-gradient-to-r from-violet-500 via-violet-600 to-secondary  rounded-xl px-5 mx-2 py-4  text-primary shadow-2xl gap-2 justify-between">
-        {!oweToYouCount ? (
-          <div className="flex flex-col justify-center">
-            <p className="text-sm ">No one owes you</p>
-
-            <span className="font-bold mt-2">{totalOwedToYou} мкд</span>
-          </div>
-        ) : (
-          <div className="flex flex-col">
-            <p className="text-sm ">Total owed to you</p>
-            <span className="font-bold mt-2">{totalOwedToYou} мкд</span>
-            <p className="text-sm">
-              by{" "}
-              {oweToYouCount === 1
-                ? oweToYouCount + " " + "friend"
-                : oweToYouCount + " " + "friends"}
-            </p>
-          </div>
-        )}
-        {!youOweCount ? (
-          <div className="flex flex-col justify-center">
-            <p className="text-sm ">You owe no one</p>
-
-            <span className="font-bold mt-2">{totalYouOwe} мкд</span>
-          </div>
-        ) : (
-          <div className="flex flex-col">
-            <p className="text-sm ">Total you owe</p>
-            <span className="font-bold mt-2">{totalYouOwe} мкд</span>
-            <p className="text-sm">
-              to{" "}
-              {oweToYouCount === 1
-                ? oweToYouCount + " " + "friend"
-                : oweToYouCount + " " + "friends"}
-            </p>
-          </div>
-        )}
+        <div className="flex flex-col">
+          <p className="text-sm ">Total owed to you</p>
+          <span className="font-bold mt-2">{totalOwedToYou} мкд</span>
+          <p className="text-sm">
+            by{" "}
+            {oweToYouCount === 1
+              ? oweToYouCount + " " + "friend"
+              : oweToYouCount + " " + "friends"}
+          </p>
+        </div>
       </div>
       <div className="flex justify-between mx-2 mt-6 text-sm font-bold mb-1 px-2 ">
         <p>Friends</p>

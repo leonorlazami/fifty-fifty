@@ -5,18 +5,20 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
   const [bill, setBill] = useState("");
   const [paidByUser, setPaidByUser] = useState("");
   const paidByFriend = bill ? bill - paidByUser : "";
-  const [whoIsPaying, setWhoIsPaying] = useState("user");
-  console.log(selectedFriend);
+  const [whoIsPaying, setWhoIsPaying] = useState("You");
+  console.log("selectedfriend:", selectedFriend);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!bill || !paidByUser) return;
-    handleSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByUser);
-  }
+    if (!bill || !paidByUser || !whoIsPaying) return;
+    handleSplitBill(bill, paidByUser, whoIsPaying);
+  };
+
   if (selectedFriend === null) {
     return null;
   }
+
   return (
     <div className="rounded-3xl mt-2 md:w-1/2 h-fit md:ml-2 font-primary bg-primary w-full px-4 text-sm font-bold ">
       <div className="flex items-center justify-around">
@@ -52,13 +54,7 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
               type="text"
               className="bg-selected rounded-2xl h-10 text-right pr-4 outline-gray-300"
               value={paidByUser}
-              onChange={(e) =>
-                setPaidByUser(
-                  Number(e.target.value) > bill
-                    ? paidByUser
-                    : Number(e.target.value)
-                )
-              }
+              onChange={(e) => setPaidByUser(Number(e.target.value))}
             />
           </label>
 
@@ -85,15 +81,28 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
           </label>
           <div className="flex w-full justify-end flex-col border-t border-gray-300 mt-2">
             <div className="flex items-center justify-between mx-4 md:text-xl md:mx-6 mb-4">
-              <h4 className="font-bold mt-4 mb-4 ">
-                {whoIsPaying === "You" && selectedFriend.name}
-              </h4>
-              <span className="">ден</span>
+              {whoIsPaying === "You" ? (
+                <>
+                  <h4 className="font-bold mt-4 mb-4">
+                    {selectedFriend.name + " will owe you"}
+                  </h4>
+                  <span className="">{bill - paidByUser} ден</span>
+                </>
+              ) : (
+                <>
+                  <h4 className="font-bold mt-4 mb-4">
+                    {"You will owe " + selectedFriend.name}
+                  </h4>
+                  <span className="">{bill - paidByFriend} ден</span>
+                </>
+              )}
             </div>
 
-            <Button className=" md:w-1/2 mx-auto mb-2 w-[65%]">
-              SPLIT IT!
-            </Button>
+            <div className="flex w-full justify-center">
+              <Button type="submit" className=" md:w-1/2 mx-auto mb-2 w-[50%]">
+                SPLIT IT!
+              </Button>
+            </div>
           </div>
         </div>
       </form>

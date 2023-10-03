@@ -1,7 +1,6 @@
 import { useState } from "react";
 import FriendList from "./components/FriendList";
 
-import Button from "./components/Button";
 import Split from "./components/Split";
 const initialFriends = [
   {
@@ -15,8 +14,8 @@ const initialFriends = [
     id: 933373,
     name: "Semi",
     image: "https://i.pravatar.cc/64?u=933372",
-    owesYou: 300,
-    youOwe: 400,
+    owesYou: 0,
+    youOwe: 0,
   },
   {
     id: 499476,
@@ -30,6 +29,8 @@ function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [showForm, setShowForm] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  console.log("selectedfriendid", selectedFriend?.id);
+
   const selectFriend = (id) => {
     const friend = friends.find((friend) => friend.id === id);
     setSelectedFriend(friend);
@@ -39,17 +40,25 @@ function App() {
     setFriends([...friends, newFriend]);
   };
 
-  const handleSplitBill = (amount) => {
-    setFriends((friend) =>
-      friend.map((friend) =>
-        friend.id === selectedFriend.id
-          ? { ...friend, balance: friend.balance + amount }
-          : friend
-      )
-    );
-  };
+  const handleSplitBill = (amount, paidByUser, whoIsPaying) => {
+    console.log("selectedfriendid", selectFriend.id);
+    const userOwesFriend = whoIsPaying === "You" ? amount - paidByUser : 0;
+    const friendOwesUser = whoIsPaying === selectedFriend.name ? paidByUser : 0;
 
-  const totalOwed = 0;
+    const newFriends = friends.map((friend) => {
+      if (friend.id === selectedFriend.id) {
+        return {
+          ...friend,
+          owesYou: friend.owesYou + userOwesFriend,
+          youOwe: friend.youOwe + friendOwesUser,
+        };
+      } else {
+        return friend;
+      }
+    });
+
+    setFriends(newFriends);
+  };
 
   return (
     <>

@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const Friend = ({ friend, selectedFriend, selectFriend }) => {
   const isSelected = selectedFriend?.id === friend.id;
-  console.log(friend.youOwe);
+
   return (
     <li
       className=" border-gray-200 last:border-b first:border-t pt-4 text-black text-sm pb-4"
