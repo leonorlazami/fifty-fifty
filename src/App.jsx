@@ -29,10 +29,10 @@ function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [showForm, setShowForm] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
-  console.log("kit friends", friends);
 
   const selectFriend = (id) => {
     const friend = friends.find((friend) => friend.id === id);
+
     setSelectedFriend(friend);
   };
 
@@ -45,6 +45,11 @@ function App() {
     const userOwesFriend = whoIsPaying === "You" ? amount - paidByUser : 0;
     const friendOwesUser = whoIsPaying === selectedFriend.name ? paidByUser : 0;
 
+    setSelectedFriend((prevSelectedFriend) => ({
+      ...prevSelectedFriend,
+      owesYou: prevSelectedFriend.owesYou + userOwesFriend,
+      youOwer: prevSelectedFriend.youOwe + friendOwesUser,
+    }));
     const newFriends = friends.map((friend) => {
       if (friend.id === selectedFriend.id) {
         return {
