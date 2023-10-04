@@ -7,23 +7,22 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
   const paidByFriend = bill ? bill - paidByUser : "";
   const [whoIsPaying, setWhoIsPaying] = useState("You");
 
-  const [friendOwesYou, setFriendOwesYou] = useState(selectedFriend.owesYou);
-  const [youOweFriend, setYouOweFriend] = useState(selectedFriend.youOwe);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!bill || !paidByUser || !whoIsPaying) return;
 
     handleSplitBill(bill, paidByUser, whoIsPaying);
-
+    setBill("");
+    setPaidByUser("");
+    setWhoIsPaying("You");
     if (selectedFriend === null) {
       return null;
     }
   };
 
   return (
-    <div className="rounded-3xl mt-2 md:w-1/2 h-fit md:ml-2 font-primary bg-primary w-full px-4 text-sm font-bold ">
+    <div className="rounded-3xl md:w-1/2  md:ml-2 font-primary bg-primary w-full px-4 text-sm font-bold  ">
       <div className="flex items-center justify-around">
         <h3 className=" mt-4 md:px-24 md:text-3xl text-xl font-bold py-2">
           Split the bill with {selectedFriend.name ? selectedFriend.name : ""}
@@ -82,7 +81,7 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
               </option>
             </select>
           </label>
-          <div className="flex w-full justify-end flex-col border-t border-gray-300 mt-2">
+          <div className="flex w-full justify-end flex-col mt-2">
             <div className="flex w-full justify-center">
               <Button type="submit" className=" md:w-1/2 mx-auto mb-2 w-[50%]">
                 SPLIT IT!
