@@ -5,7 +5,7 @@ import Split from "./components/Split";
 const initialFriends = [
   {
     id: 933372,
-    name: "Ali",
+    name: "Efki",
     image: "https://i.pravatar.cc/64?u=933372",
     owesYou: 300,
     youOwe: 0,
@@ -29,7 +29,7 @@ function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [showForm, setShowForm] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
-  console.log("selectedfriendid", selectedFriend?.id);
+  console.log("kit friends", friends);
 
   const selectFriend = (id) => {
     const friend = friends.find((friend) => friend.id === id);

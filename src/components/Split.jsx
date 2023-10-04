@@ -6,7 +6,6 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
   const [paidByUser, setPaidByUser] = useState("");
   const paidByFriend = bill ? bill - paidByUser : "";
   const [whoIsPaying, setWhoIsPaying] = useState("You");
-  console.log("selectedfriend:", selectedFriend);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,14 +85,16 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
                   <h4 className="font-bold mt-4 mb-4">
                     {selectedFriend.name + " will owe you"}
                   </h4>
-                  <span className="">{bill - paidByUser} ден</span>
+                  <span className=""> {selectedFriend.owesYou}ден</span>
                 </>
               ) : (
                 <>
                   <h4 className="font-bold mt-4 mb-4">
                     {"You will owe " + selectedFriend.name}
                   </h4>
-                  <span className="">{bill - paidByFriend} ден</span>
+                  <span className="text-red-500">
+                    {selectedFriend.youOwe} ден
+                  </span>
                 </>
               )}
             </div>
