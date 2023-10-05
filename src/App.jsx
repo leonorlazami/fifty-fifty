@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FriendList from "./components/FriendList";
 
 import Split from "./components/Split";
@@ -24,9 +24,18 @@ const initialFriends = [
     owesYou: 0,
     youOwe: 0,
   },
+  {
+    id: 499477,
+    name: "Leo",
+    image: "https://i.pravatar.cc/64?u=499476",
+    owesYou: 500,
+    youOwe: 0,
+  },
 ];
 function App() {
-  const [friends, setFriends] = useState(initialFriends);
+  const [friends, setFriends] = useState(
+    JSON.parse(localStorage.getItem("friends")) || initialFriends
+  );
   const [showForm, setShowForm] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
@@ -64,7 +73,9 @@ function App() {
 
     setFriends(newFriends);
   };
-
+  useEffect(() => {
+    localStorage.setItem("friends", JSON.stringify(friends));
+  }, [friends]);
   return (
     <>
       <div className="flex flex-col md:flex-row  mt-4">

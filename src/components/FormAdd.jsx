@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
+function randomNum() {
+  return Math.floor(10000000 + Math.random() * 9000000);
+}
+
 const FormAdd = ({ addFriend, setShowForm }) => {
   const [formData, setFormData] = useState({
     name: null,
-    image: "https://i.pravatar.cc/64",
+    image: `https://i.pravatar.cc/64?u=${randomNum()}`,
     owesYou: 0,
     youOwe: 0,
   });
