@@ -6,7 +6,7 @@ const Friend = ({ friend, selectedFriend, selectFriend }) => {
 
   return (
     <li
-      className=" border-gray-200 last:border-b first:border-t pt-4 text-black text-sm pb-4"
+      className=" border-gray-200 last:border-b first:border-t pt-4 text-black text-sm pb-4 md:text-lg"
       onMouseEnter={() => selectFriend(friend.id)}
     >
       <div

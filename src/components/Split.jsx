@@ -22,7 +22,7 @@ const Split = ({ selectedFriend, handleSplitBill }) => {
   };
 
   return (
-    <div className="rounded-3xl md:w-[42%] md:ml-2 font-primary bg-primary w-full px-4 text-sm font-bold mx-auto  md:h-fit md:mt-10 ">
+    <div className="rounded-3xl md:w-[42%] md:ml-2 font-primary bg-primary w-full px-4 text-sm font-bold mx-auto  md:h-fit md:mt-10 md:text-lg">
       <div className="flex items-center justify-around">
         <h3 className=" mt-4 md:px-24 md:text-3xl text-xl font-bold py-2">
           Split the bill with {selectedFriend.name ? selectedFriend.name : ""}
