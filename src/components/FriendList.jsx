@@ -22,7 +22,7 @@ const FriendList = ({
   const oweToYouCount = friends.filter((friend) => friend.owesYou > 0).length;
 
   return (
-    <div className=" flex flex-col font-primary text-xl rounded-3xl py-4 md:w-[50%] md:mx-auto md:text-3xl mx-2 bg-primary px-1">
+    <div className=" flex flex-col font-primary text-xl rounded-3xl py-4 md:w-[30%] md:h-fit md:mx-auto md:text-3xl mx-2 bg-primary px-2 md:mt-10">
       <div className="mx-auto flex flex-col items-center font-bold mb-4">
         <h3 className="text-md mb-[-0.2rem]">Fifty/Fifty</h3>
         <p className="text-gray-500 text-sm">Split the bill!</p>
@@ -62,7 +62,7 @@ const FriendList = ({
       {showForm && <FormAdd addFriend={addFriend} setShowForm={setShowForm} />}
 
       <Button
-        className="mt-2 text-sm py-3 rounded-3xl md:w-1/2  mx-auto w-[65%]"
+        className="mt-2 text-sm py-3 rounded-3xl md:w-[40%]  mx-auto w-[65%]"
         onClick={() => {
           setShowForm((prev) => !prev);
         }}

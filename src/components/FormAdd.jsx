@@ -76,7 +76,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
           <div className="flex flex-col gap-4 mx-auto w-full  py-2 font-bold">
             <label
               htmlFor="youOwe"
-              className="flex items-center justify-around "
+              className="flex items-center justify-around md:justfy-center "
             >
               <input
                 name="youOwe"
@@ -112,7 +112,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
               </p>
             </label>
           </div>
-          <Button className="w-[60%] mx-auto mt-4" type="submit">
+          <Button className="w-[60%] mx-auto mt-4 md:w-[40%]" type="submit">
             Add
           </Button>
         </form>
