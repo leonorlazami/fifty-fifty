@@ -3,6 +3,7 @@ import Friend from "./Friend";
 import Button from "./Button";
 import FormAdd from "./FormAdd";
 import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
+import { split } from "postcss/lib/list";
 
 const FriendList = ({
   selectFriend,
@@ -43,12 +44,6 @@ const FriendList = ({
       </div>
       <div className="flex justify-between mx-2 mt-6 text-sm font-bold mb-1 px-2 md:text-xl ">
         <p>Friends</p>
-
-        <button className="flex items-center ">
-          <p className="uppercase text-gray-500 mr-1">Edit</p>
-
-          <AiOutlineEdit color="gray" size={18} />
-        </button>
       </div>
       <ul className="py-2">
         {friends.map((friend) => (
@@ -64,7 +59,7 @@ const FriendList = ({
       {showForm && <FormAdd addFriend={addFriend} setShowForm={setShowForm} />}
 
       <Button
-        className="mt-2 text-sm py-3 rounded-3xl md:w-[40%]  mx-auto w-[65%] md:text-lg"
+        className="mt-2 text-sm py-2 rounded-3xl md:w-[40%]  mx-auto w-1/2 md:text-lg"
         onClick={() => {
           setShowForm((prev) => !prev);
         }}

@@ -15,6 +15,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
 
   const [owesYou, setOwesYou] = useState(false);
   const [youOwe, setYouOwe] = useState(false);
+  const [formError, setFormError] = useState(null); // New state for form errors
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -23,6 +24,12 @@ const FormAdd = ({ addFriend, setShowForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.name || !formData.balance) {
+      // If either name or balance is empty, set an error message
+      setFormError("Please fill out both name and amount fields.");
+      return;
+    }
 
     const newFriend = {
       id: Date.now(),
@@ -41,6 +48,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
       youOwe: 0,
     });
     setShowForm(false);
+    setFormError(null); // Clear the error message after successful submission
   };
 
   return (
@@ -51,6 +59,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
           method="post"
           onSubmit={handleSubmit}
         >
+          {formError && <p className="text-red-500">{formError}</p>}
           <label htmlFor="friendName" className="font-bold">
             Friend&apos;s name
             <input
@@ -63,14 +72,14 @@ const FormAdd = ({ addFriend, setShowForm }) => {
             />
           </label>
           <label htmlFor="balance" className="font-bold">
-            Amount of $$$
+            Amount of мкд
             <input
               name="balance"
               value={formData.balance}
               onChange={handleChange}
               type="text"
               id="balance"
-              className="text-black w-full border border-gray-200 rounded-md px-3 py-1  font-normal"
+              className="text-black w-full border border-gray-200 rounded-md px-3 py-1 font-normal"
             />
           </label>
           <div className="flex flex-col gap-4 mx-auto w-full  py-2 font-bold">
@@ -112,7 +121,7 @@ const FormAdd = ({ addFriend, setShowForm }) => {
               </p>
             </label>
           </div>
-          <Button className="w-[60%] mx-auto mt-4 md:w-[40%]" type="submit">
+          <Button className="w-1/2 mx-auto mt-4 md:w-[40%]" type="submit">
             Add
           </Button>
         </form>

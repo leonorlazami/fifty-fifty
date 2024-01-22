@@ -5,3 +5,7 @@ body {
   background-color: #b8babc;
   overscroll-behavior: none;
 }
+
+.split {
+  scroll-snap-point: start;
+}

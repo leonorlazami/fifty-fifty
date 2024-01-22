@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FriendList from "./components/FriendList";
-
 import Split from "./components/Split";
+
 const initialFriends = [
   {
     id: 933372,
@@ -57,7 +57,7 @@ function App() {
     setSelectedFriend((prevSelectedFriend) => ({
       ...prevSelectedFriend,
       owesYou: prevSelectedFriend.owesYou + userOwesFriend,
-      youOwer: prevSelectedFriend.youOwe + friendOwesUser,
+      youOwe: prevSelectedFriend.youOwe + friendOwesUser,
     }));
     const newFriends = friends.map((friend) => {
       if (friend.id === selectedFriend.id) {

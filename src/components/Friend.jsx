@@ -1,24 +1,35 @@
 import React from "react";
 import Button from "./Button";
 
-const Friend = ({ friend, selectedFriend, selectFriend }) => {
+const Friend = ({ friend, selectedFriend, selectFriend, splitRef }) => {
   const isSelected = selectedFriend?.id === friend.id;
 
   return (
     <li
-      className=" border-gray-200 last:border-b first:border-t pt-4 text-black text-sm pb-4 md:text-lg"
-      onMouseEnter={() => selectFriend(friend.id)}
+      className="border-gray-200 last:border-b first:border-t text-black text-sm py-2 md:text-lg"
+      onMouseEnter={() => {
+        selectFriend(friend.id);
+
+        if (window.innerWidth <= 768) {
+          setTimeout(() => {
+            window.scrollTo({
+              top: window.innerHeight, // You can adjust this value
+              behavior: "smooth",
+            });
+          }, 150);
+        }
+      }}
     >
       <div
         className={`${
           isSelected ? "bg-selected" : ""
-        } flex items-center px-2 w-full`}
+        } flex items-center px-3 w-full rounded-md `}
       >
         <div className="flex items-center justify-center">
           <img
             src={friend.image}
             alt={friend.name}
-            className="rounded-full mx-3 my-1"
+            className="rounded-full mx-3 py-2"
           />
 
           <h3 className="font-bold text-md">{friend.name}</h3>
